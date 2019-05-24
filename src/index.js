@@ -1,32 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
+import Axios from 'axios';
 
-const GetData = () => {
-  const [data, setData] = useState(null);
+const RenderData = ({ data }) => {
+  data.map(dat => {
+    console.log(dat);
+  });
+  return null;
+};
+
+const App = () => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const results = await axios.get(
+        const results = await Axios.get(
           'https://hn.algolia.com/api/v1/search?query=redux'
         );
-        console.log(results);
-        setData(results.status);
-      } catch (err) {
-        console.log(err);
+        setData(results.data.hits);
+        console.log(results.data.hits);
+      } catch (e) {
+        console.error(e);
       }
     };
     fetchData();
-  });
+  }, []);
 
-  return <div> {data}</div>;
-};
-
-const App = () => {
   return (
     <div>
-      <GetData />
+      <RenderData data={data} />
     </div>
   );
 };
