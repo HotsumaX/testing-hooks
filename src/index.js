@@ -3,10 +3,24 @@ import ReactDOM from 'react-dom';
 import Axios from 'axios';
 
 const RenderData = ({ data }) => {
-  data.map(dat => {
-    console.log(dat);
+  return data.map((dat, idx) => {
+    if (idx > 4) return;
+
+    return (
+      <section>
+        <h4>Item {idx + 1}</h4>
+        {Object.entries(dat).map((key, value) => {
+          return <p>{`${key}:  ${value}`}</p>;
+        })}
+      </section>
+    );
+
+    // (
+    //   <div key={dat.objectID}>
+    //     {dat.author} &nbsp; {dat.points} &nbsp; {dat.url}
+    //   </div>
+    // );
   });
-  return null;
 };
 
 const App = () => {
