@@ -7,12 +7,23 @@ const RenderData = ({ data }) => {
     if (idx > 4) return;
 
     return (
-      <section>
-        <h4>Item {idx + 1}</h4>
-        {Object.entries(dat).map((key, value) => {
-          return <p>{`${key}:  ${value}`}</p>;
-        })}
-      </section>
+      <table key={dat.objectID}>
+        <thead>
+          <tr>
+            <th>Item {idx + 1}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.entries(dat).map(([key, value]) => {
+            return (
+              <tr key={key}>
+                <td>{key.toString()}</td>
+                <td>{value && value.toString()}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     );
 
     // (
