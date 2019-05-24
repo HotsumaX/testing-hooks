@@ -9,18 +9,18 @@ const GetData = () => {
     const fetchData = async () => {
       try {
         const results = await axios.get(
-          'https://hn.algolia.com/api/v1/search?query=redux'
+          'http://hn.algolia.com/api/v1/search?query=redux'
         );
-        console.log(results);
         setData(results.status);
+        console.log(results);
       } catch (err) {
-        console.log(err);
+        throw new Error(err);
       }
     };
     fetchData();
   });
 
-  return <div> {data}</div>;
+  return <div>something goes here {data}</div>;
 };
 
 const App = () => {
